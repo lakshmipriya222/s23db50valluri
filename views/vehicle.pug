@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1= title
+  -
+    let results = [
+      {
+        "vehicle_brand": "Honda CBR",
+        "vehicle_type": "2 wheeler",
+        "vehicle_cost": 150000
+      },
+      {
+        "vehicle_brand": "Hyundai",
+        "vehicle_type": "4 wheeler",
+        "vehicle_cost": 350000
+      },
+      {
+        "vehicle_brand": "Audi",
+        "vehicle_type": "4 wheeler",
+        "vehicle_cost": 500000
+      },                   
+    ]
+  div(class= "container-fluid")
+    div(class = "row")
+      each item,index in results
+        div(class= "col-sm-2", onclick=`buy(${index})`) Brand: #{item.vehicle_brand}
+        div(class= "col-sm-2", onclick=`buy(${index})`) Type: #{item.vehicle_type}
+        div(class= "col-sm-2", onclick=`buy(${index})`) Cost: #{item.vehicle_cost}
+        br
+        br
+        
+  script.
+    function buy(itemNum){
+      alert(`You purchased item ${itemNum+1}`)
+    }
