@@ -2,18 +2,22 @@ extends layout
 
 block content
   h1= title
+  - let des = `dispatch(\"/vehicle/create\")`
+  button.btn( class="ml-1" id="btn-5" onclick= des) Create
   -
-    let items = results
+    let items  = results
   div(class= "container-fluid")
-    div(class = "row")
+    div(class = "col m-1")
       each item,index in items
-        div(class= "col-sm-2", onclick=`buy(${index})`) Brand: #{item.vehicle_brand}
-        div(class= "col-sm-2", onclick=`buy(${index})`) Type: #{item.vehicle_type}
-        div(class= "col-sm-2", onclick=`buy(${index})`) Cost: #{item.vehicle_cost}
-        br
-        br
+        - let destination = `dispatch(\"/vehicle/update?id=${item._id}\")`
+        - let destination1 = `dispatch(\"/vehicle/detail?id=${item._id}\")`
+        - let destination2 = `dispatch(\"/vehicle/delete?id=${item._id}\")`
+        div(class="row-sm-2", class="m-1") Item #{item.vehicle_brand}(#{item.vehicle_quantity}) is #{item.vehicle_cost}
+        button.btn( class="btn btn-primary", onclick= destination) Update
+        button.btn( class="btn btn-secondary", onclick= destination1) Details
+        button.btn( class="btn btn-success", onclick= destination2) Delete
         
   script.
-    function buy(itemNum){
-      alert(`You purchased item ${itemNum+1}`)
+    function dispatch(path){
+      window.location.href=path
     }

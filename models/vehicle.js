@@ -6,11 +6,15 @@ const vehiclesSchema = mongoose.Schema({
     },
     vehicle_type: {
         type: String,
-        required:true
+        required:true,
+        maxLength:10
     },
     vehicle_cost: {
-        type: String,
-        required:true
+        type: Number,
+        required:true,
+        min: 0,
+        max: 10000000
+
     }
     })
 module.exports = mongoose.model("Vehicle",vehiclesSchema)
